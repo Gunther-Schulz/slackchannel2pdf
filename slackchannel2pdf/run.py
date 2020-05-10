@@ -23,7 +23,7 @@ def main():
 
     args = parse_args(sys.argv[1:])
     start_export = True
-    
+
     if "version" in args:
         print(__version__)
         start_export = False
@@ -48,7 +48,7 @@ def main():
             start_export = False            
     else:
         my_tz = None 
-    
+
     # parse locale
     if args.locale is not None:        
         try:
@@ -96,7 +96,8 @@ def main():
             page_orientation=args.page_orientation,
             page_format=args.page_format,
             max_messages=args.max_messages, 
-            write_raw_data=(args.write_raw_data is True)
+            write_raw_data=(args.write_raw_data is True),
+            read_cached=(args.read_cached is True)
         )
 
 
@@ -190,6 +191,17 @@ def parse_args(args):
         action="store_const",
         const=True
     )    
+
+    my_arg_parser.add_argument(        
+        "--read-cached",
+        help=(
+            "will read data from previously written raw message data, if it exists,"
+            " e.g. messages.json with all messages"
+        ),                
+        action="store_const",
+        const=True
+    )  
+
     my_arg_parser.add_argument(        
         "--add-debug-info",
         help="wether to add debug info to PDF",
@@ -197,9 +209,9 @@ def parse_args(args):
         const=True,
         default=False
     )
-    
+
     return my_arg_parser.parse_args(args)
-    
-    
+
+
 if __name__ == '__main__':
     main()

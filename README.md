@@ -48,10 +48,11 @@ For windows users we also provide a Windows EXE that does not require you to ins
 
 ## Token
 
-To run **slackchannel2pdf** your need to have a token for your Slack workspace with the following permissions:
+To run **slackchannel2pdf** your need to have a "OAuth Access Token" token for your Slack workspace with the following permissions:
 
 - `channels:history`
 - `channels:read`
+- `files:read`
 - `groups:history`
 - `groups:read`
 - `users:read`
@@ -92,7 +93,7 @@ slackchannel2pdf --token MY_TOKEN --oldest "2019-JUL-05 11:00" general
 usage: run.py [-h] [--token TOKEN] [--oldest OLDEST] [--latest LATEST]
               [-d DESTINATION] [--page-orientation {portrait,landscape}]
               [--page-format {a3,a4,a5,letter,legal}] [--timezone TIMEZONE]
-              [--locale LOCALE] [--version] [--max-messages MAX_MESSAGES]  
+              [--locale LOCALE] [--version] [--max-messages MAX_MESSAGES]
               [--write-raw-data] [--add-debug-info]
               channel [channel ...]
 
@@ -128,12 +129,14 @@ optional arguments:
   --write-raw-data      will also write all raw data returned from the API to
                         files, e.g. messages.json with all messages (default:
                         None)
+  --read-cached         Reads messages from previously written Json files (with --write-raw-data)
+                        instead of retrieving them from slack.
   --add-debug-info      wether to add debug info to PDF (default: False)
 ```
 
 ## Limitations
 
-- Text only: **slackchannel2pdf** will export only text from a channel, but not images or icons. This is by design.
+- Text only: **slackchannel2pdf** will export only text and images from a channel, but not icons.
 - No Emojis: the tools is currently not able to write emojis as icons will will use their text representation instead (e.g. `:laughing:` instead of :laughing:).
 - DMs, Group DM: Currently not supported
 - Limited blocks support:Some non-text features of layout blocks not yet supported

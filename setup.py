@@ -41,6 +41,7 @@ setup(
         'python-dateutil==2.8.0',
         'slackclient==2.1.0',
         'tzlocal==2.0.0',
+        'requests==2.23.0'
     ],
     extras_require={
         'testing': [
